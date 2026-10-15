@@ -73,3 +73,35 @@ body {
     color: #666;
     font-style: italic;
 }
+
+summary {
+    font-weight: bold;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 275px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item .caption {
+    padding: 15px;
+    text-align: center;
+    background: #ffffff;
+    font-size: 14px;
+    color: #333;
+}
