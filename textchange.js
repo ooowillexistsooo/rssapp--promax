@@ -44,7 +44,6 @@ function typeEffect() {
   setTimeout(typeEffect, nextSpeed);
 }
 
-// Start the animation
 document.addEventListener("DOMContentLoaded", typeEffect);
 window.addEventListener("DOMContentLoaded", () => {
     const randomIndex = Math.floor(Math.random() * subtitles.length);
