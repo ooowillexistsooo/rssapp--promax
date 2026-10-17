@@ -3,5 +3,17 @@ body {
 }
 
 .container {
-    background-color: aliceblue;
+    background-color: rgb(195, 227, 255);
+    padding: 10px;
+    text-wrap: inherit;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    border-radius: 7px;
+}
+
+pre {
+    font-family: 'Pixel';
 }

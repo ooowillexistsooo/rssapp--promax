@@ -10,4 +10,4 @@ freg is the mascot/streak enjoyer/enthusiast of rss app ++ pro max. we love freg
 - css
 - js
 - broider (by max biktel)
-- augiepixel and an untitled isometric font (i found somewhere a long time ago) as fonts
+- augiepixel font (given permission by @augie to use this)
