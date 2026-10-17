@@ -5,29 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main feed</title>
     <link rel="stylesheet" href="../cool.css">
+    <link rel="stylesheet" href="welcome.css">
 </head>
 <body>
-    <h1>the feed</h1>
-    <button>add new rss</button>
-    <br>
-    <div class="freg">
-        <h3>start your freg streak</h3>
-        <p>read your feed for more than 5 minutes a day, and make freg happy.</p>
-        <p>the bigger your streak, the happier freg is</p>
-        <p>freg can even dance on holidays wow</p>
-        <button>start freg streak</button>
+    <div id="everythign">
+        <h1 id="title">the feed</h1>
+        <button id="new">add new rss</button>
+        <br><br>
+        <div id="streak" class="freg">
+            <h2>the freg zone..!</h2>
+            <a href="../freg/index.html">more on freg</a>
+            <details>
+                <summary>your freg streak</summary>
+                <p>read your feed for more than 5 minutes a day, and make freg happy.</p>
+                <p>the bigger your streak, the happier freg is</p>
+                <p>freg can even dance on holidays wow</p>
+                <button>start freg streak</button>
+            </details>
+            <details>
+                <summary>things freg does for u (because he cares about you)</summary>
+                <p>helo this is messg from me, freg, i will do thing for yu</p>
+                <button onclick="startTour(true)">hello freg please show me the tour again</button>
+                <button onclick="iloveyou()">freg i love you</button>
+                <p id="response"></p>
+            </details>
+        </div>
+        <br>
+        <div id="post" class="post love">
+            <h3>this could be your feed! this actually changes with <a href="https://testfeed.willexists.space">this site</a></h3>
+            <p id="test-feed">loading...</p>
+        </div>
+        <br>
+        <div class="what demo">
+            <h3>have we convinced you to sign up yet?</h3>
+            <a href="">sign up</a>
+        </div>
+        <br>
+        <div id="tour-box" class="tour-hidden">
+            <div class="textbox">
+                <div class="avatar-container">
+                    <img src="../static/tour-freg.png" alt="freg" id="avatar">
+                    <div class="name-tag">tour guide freg</div>
+                </div>
+                <div class="dialog-body">
+                    <p id="tour-text"></p>
+                    <div class="buttons">
+                        <p>you can also press space to continue</p>
+                        <button id="tour-next-button">Next ❯</button>
+                        <button id="tour-skip-button">Skip</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="../settings/index.html">settings</a>
     </div>
-    <br>
-    <div class="post love">
-        <h3>this could be your feed! this actually changes with <a href="https://testfeed.willexists.space">this site</a></h3>
-        <p id="test-feed">loading...</p>
-    </div>
-    <br>
-    <div class="what">
-        <h3>have we convinced you to sign up yet?</h3>
-        <a href="">sign up</a>
-    </div>
-    <a href="../settings/index.html">settings</a>
+    
     <script src="testfeed.js"></script>
+    <script src="tour.js"></script>
 </body>
 </html>

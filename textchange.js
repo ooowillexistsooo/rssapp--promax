@@ -1,6 +1,7 @@
 const words = ["love", "tea", "anything but react", "pure chaos", "late nights"];
 const subtitles = [
     "welcome folks",
+    "made with anger and disgust",
     "workin 9-5... what a way to make a livin'..",
     "avocadoe",
     "all hail freg the frog",
