@@ -6,6 +6,7 @@
     <title>main feed</title>
     <link rel="stylesheet" href="../cool.css">
     <link rel="stylesheet" href="welcome.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
     <div id="everythign">
@@ -38,7 +39,7 @@
         <br>
         <div class="what demo">
             <h3>have we convinced you to sign up yet?</h3>
-            <a href="">sign up</a>
+            <a href="../signup/index.html">sign up</a>
         </div>
         <br>
         <div id="tour-box" class="tour-hidden">
@@ -59,8 +60,24 @@
         </div>
         <a href="../settings/index.html">settings</a>
     </div>
-    
+    <dialog id="new-rss-modal">
+        <h2>add new rss feed</h2>
+        <img src="../static/freg-notes.png">
+        <form action="">
+            <label for="">title</label>
+            <input type="text" required>
+            <br>
+            <label for="">rss link</label>
+            <input type="text" placeholder="e.g. https://rss.app/feeds/Mvro7BfVoYRBffwo.xml" required>
+            <br>
+            <button type="submit">add feed!</button>
+            <br>
+            <button type="reset">reset</button>
+        </form>
+        <button id="close-modal">close</button>
+    </dialog>
     <script src="testfeed.js"></script>
     <script src="tour.js"></script>
+    <script src="modal.js"></script>
 </body>
 </html>

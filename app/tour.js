@@ -46,6 +46,8 @@ const tourSteps = [
 let currentStep = 0;
 let textTimer = null;
 let isTyping = false;
+let isTourActive = false;
+let isEasterEggTour = false;
 let completeText = "";
 
 const tourBox = document.getElementById("tour-box");
@@ -53,6 +55,8 @@ const tourText = document.getElementById("tour-text");
 const nextBtn = document.getElementById("tour-next-button");
 const skipBtn = document.getElementById("tour-skip-button");
 const tourSeenKey = "rssAppTourSeen";
+const completedToursKey = "rssAppCompletedTours";
+const avatar = document.getElementById("avatar");
 
 function startTour(force = false) {
     if (!force && localStorage.getItem(tourSeenKey)) {
@@ -60,7 +64,13 @@ function startTour(force = false) {
     }
 
     localStorage.setItem(tourSeenKey, "true");
+    clearInterval(textTimer);
     currentStep = 0;
+    isTourActive = true;
+    isEasterEggTour = Number(localStorage.getItem(completedToursKey) || "0") >= 7;
+    avatar.src = isEasterEggTour
+        ? "../static/tour-freg.png"
+        : "../static/freg-1.png";
     tourBox.classList.remove("tour-hidden");
     showStep();
 }
@@ -70,7 +80,9 @@ function showStep() {
 
     if (currentStep < tourSteps.length) {
         const step = tourSteps[currentStep];
-        completeText = step.text;
+        completeText = currentStep === 0 && isEasterEggTour
+                ? "hi im poobert and i'll be the one giving you this tour"
+                : step.text;
 
         const targetElement = document.getElementById(step.elementId);
         if (targetElement) {
@@ -80,7 +92,7 @@ function showStep() {
 
         typewriterEffect(completeText);
     } else {
-        endTour();
+        endTour(true);
     }
 }
 
@@ -112,7 +124,7 @@ nextBtn.addEventListener("click", () => {
     }
 });
 
-skipBtn.addEventListener("click", endTour);
+skipBtn.addEventListener("click", () => endTour());
 
 document.addEventListener("keydown", (event) => {
     if (event.code !== "Space" || event.repeat || tourBox.classList.contains("tour-hidden")) {
@@ -123,7 +135,17 @@ document.addEventListener("keydown", (event) => {
     nextBtn.click();
 });
 
-function endTour() {
+function endTour(completed = false) {
+    if (!isTourActive) {
+        return;
+    }
+
+    isTourActive = false;
+    if (completed) {
+        const count = Number(localStorage.getItem(completedToursKey) || "0");
+        localStorage.setItem(completedToursKey, String(count + 1));
+    }
+
     clearInterval(textTimer);
     tourBox.classList.add("tour-hidden");
     document.querySelectorAll('.tour-highlight').forEach(el => el.classList.remove('tour-highlight'));

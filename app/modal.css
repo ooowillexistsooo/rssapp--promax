@@ -1,0 +1,12 @@
+dialog {
+    border-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFQAAABUCAYAAAAcaxDBAAAB80lEQVR4Aezb0W3CMBSF4bSDsQczME9n6B5drFX8BDfC5sh/IcBfKVGD7ePLlyu/8bn4hwoIinIui6CCwgJwnB0qKCwAx9mhgsICcJwdKigsAMfZoYLCAnBc3KGnw/H3dDjefMH1Tsclta9z0w1j0HSDd5svKPzGBd0b6NfP98f5Vetbz6E9XbW+89rX/+t4+myHpmKD+YIOgNJhQVOxwfxp0Ho+rufQM121/oHXcHgadLjDm00QFH7hgj4atJ6PN9bzNNNmv58dCr9qQQWFBeA4O1RQWACOs0MFhQXgODtUUFgAjrNDBYUF4Lg9dyj8Ve8TJyjsLKigsAAcZ4cKCgvAcXaooLAAHGeHCgoLwHF2qKCwABz3ah0K8+RxguZm3RWCdnnyQUFzs+4KQbs8+aCguVl3haBdnnxQ0Nysu0LQLk8+KGhu1l0haJcnHxQ0N+uuiEHp3/V0q7vP4MUus98vBr3Y3YeNgKAbkrkPBJ3z26yeBq2/66ln0N6fa/0bofCDadBwv5efLij8igXdG2g9I2t99Yx69HOtb1R/nT96tkNHQuG4oCHYaLqgI6FwPAZNz8Cwnn+fDtV/tc4Y9GqSA01A0MbA3QTlLFuSoI2BuwnKWbYkQRsDdxOUs2xJgjYG7iYoZ9mSBG0M3E1QzrIl/QEAAP//MVYQpgAAAAZJREFUAwDTdQDH1bmAsQAAAABJRU5ErkJggg==') 28 /  28px / 0 round;
+    border-width:  28px;
+    border-style:  solid;
+    max-width: 400px;
+    width: 100%;
+}
+
+dialog::backdrop {
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+}
