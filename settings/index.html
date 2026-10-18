@@ -5,19 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>settings</title>
     <link rel="stylesheet" href="../cool.css">
+    <link rel="stylesheet" href="../app/modal.css">
+    <link rel="stylesheet" href="settings.css">
 </head>
 <body>
     <a href="../app/index.html">go back home</a>
     <h1>settings</h1>
+    <img src="../static/freg-fix.png" alt="">
     <h3>rss settings</h3>
     <div>
         <label>display rss feed title</label>
         <input type="checkbox">
+    </div>
+    <h3>my feeds</h3>
+    <div>
+        <div>
+            <h3>demo feed</h3>
+            <button>edit title</button><br>
+            <button>delete feed</button>
+        </div>
     </div>
     <h3>customising</h3>
     <div>
         <label>custom feed css</label>
         <textarea placeholder="blah blah..."></textarea>
     </div>
+    <div>
+        <label for="">choose your font..!</label>
+        <select id="fontDropdown">
+            <option class="augiepixel" value="Pixel">augiepixel (default)</option>
+            <option class="arial" value="Arial, sans-serif">arial</option>
+            <option class="georgia" value="Georgia, serif">georgia</option>
+            <option class="cursive" value="cursive">cursive</option>
+            <option class="opendyslexic" value="OpenDyslexic">OpenDyslexic</option>
+        </select>
+    </div>
+    <h3>~account settings~</h3>
+    <div>
+        <form action="">
+            <label for="">opt in to holiday things?</label>
+            <input type="checkbox">
+            <br>
+            <input type="text" placeholder="edit username *optional*">
+            <br>
+            <input type="email" placeholder="edit email *optional*">
+            <br>
+            <p>to change account password, scroll down more</p>
+        </form>
+    </div>
+    <div class="danger-zone">
+        <h3>DANGER ZONE!!!</h3>
+        <button id="pass-open">change password</button><br>
+        <button id="del-open">delete account</button>
+    </div>
+    <dialog id="delete-account-modal">
+        <h3 class="important">delete your account</h3>
+        <button>its not even working why do you do this</button>
+        <br>
+        <button id="del-close">close</button>
+    </dialog>
+    <dialog id="passcode-change-modal">
+        <h3 class="important">change password?</h3>
+        <form action="">
+            <label>are you like super duper sure</label>
+            <input type="text" placeholder="type 'ya im sure'" required pattern="^ya im sure$">
+            <label for="">please type your current password</label>
+            <input type="text" required><br>
+            <label for="">please type the new password</label>
+            <input type="text" required><br>
+            <button type="submit" >i am sure that i want to do this</button>
+            <button type="reset">reset form</button>
+        </form>
+        <button id="pass-close">close</button>
+    </dialog>
+    <script src="../prefrences.js"></script>
+    <script>
+        const delmodal = document.getElementById('delete-account-modal');
+        const openBtnDel = document.getElementById('del-open');
+        const closeBtnDel = document.getElementById('del-close');
+        const passmodal = document.getElementById('passcode-change-modal');
+        const openBtnPass = document.getElementById('pass-open');
+        const closeBtnPass = document.getElementById('pass-close');
+
+        openBtnDel.addEventListener('click', () => {
+            delmodal.showModal();
+        });
+
+        closeBtnDel.addEventListener('click', () => {
+            delmodal.close();
+        });
+
+        openBtnPass.addEventListener('click', () => {
+            passmodal.showModal();
+        });
+
+        closeBtnPass.addEventListener('click', () => {
+            passmodal.close();
+        });
+    </script>
 </body>
 </html>

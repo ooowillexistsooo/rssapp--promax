@@ -1,4 +1,4 @@
-const words = ["love", "tea", "anything but react", "pure chaos", "late nights"];
+const words = ["love", "tea", "anything but react", "hatred", "memes", "lots of reading inbetween coding dont blame me it gets tiring"];
 const subtitles = [
     "welcome folks",
     "made with anger and disgust",

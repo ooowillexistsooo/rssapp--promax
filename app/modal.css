@@ -10,3 +10,8 @@ dialog::backdrop {
     background-color: rgba(0,0,0,0.5);
     backdrop-filter: blur(3px);
 }
+
+.important {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: crimson;
+}
