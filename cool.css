@@ -19,12 +19,40 @@
     src: url('fonts/OpenDyslexic-Regular.otf');
 }
 
+:root {
+    --bg-color: #ffffff;
+    --text-color: black;
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    color-scheme: dark;
+}
+
 body {
     font-family: 'Pixel';
     font-size: medium;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     border-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAvElEQVR4AeyYOw7AMAhD2+65/0FzgHYyC4NFBCpIrhRZ+QDuC1OetdY7YTzXkM+M7r3vjgMczSgWuqozin6FYTbHuWp1RqsLnuZ3RtGnSMjmOFetzmh1wdP8ZhS92E3xY2YUC13VjKIXuynAmVEsdFUZzb4ZERXRbALZ+dSjIppNIDufevQvotl1w/l09WFkJEBECaDwtoiGkZEAESWAwtsiGkZGAkSUAApvi2gYGQmYR7Tbuyj8APQYoh8AAAD//8Zd9I8AAAAGSURBVAMAH+V4oCABbvoAAAAASUVORK5CYII=') 14 /  14px / 0 round;
     border-width:  28px;
     border-style:  solid; 
+}
+
+.dark-mode body {
+    border-color: transparent;
+}
+
+.dark-mode body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2147483646;
+    border: 28px solid transparent;
+    border-image: inherit;
+    filter: invert(1);
+    pointer-events: none;
 }
 
 .what {
@@ -117,4 +145,53 @@ summary {
 
 button {
     font-family: "Pixel";
+}
+
+#theme-toggle {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 100000000000000000;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    place-items: center;
+    border: 3px solid #ff914d;
+    border-radius: 2px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    box-shadow: 3px 3px 0 #7cd175;
+    cursor: pointer;
+}
+
+#theme-toggle i {
+    font-size: 18px;
+}
+
+#theme-toggle:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+}
+
+#theme-toggle:focus-visible {
+    outline: 3px solid #ffbc42;
+    outline-offset: 2px;
+}
+
+nav.cloud {
+    padding-right: 145px;
+}
+
+.dark-mode .container {
+    background-color: #263543;
+}
+
+.dark-mode .textbox {
+    background-color: #28261e;
+    border-color: #5f5739;
+}
+
+.dark-mode #tour-text {
+    color: #f5f1df;
 }

@@ -157,3 +157,7 @@ function iloveyou() {
     const response = document.getElementById("response");
     response.textContent = "oh thats wonderful";
 }
+
+function frogtank() {
+    response.textContent = "bro this is not frog tank";
+}

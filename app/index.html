@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="../cool.css">
     <link rel="stylesheet" href="welcome.css">
     <link rel="stylesheet" href="modal.css">
+    <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
 </head>
 <body>
+    <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i></button>
     <div id="everythign">
         <h1 id="title">the feed</h1>
         <button id="new">add new rss</button>
@@ -28,6 +36,7 @@
                 <p>helo this is messg from me, freg, i will do thing for yu</p>
                 <button onclick="startTour(true)">hello freg please show me the tour again</button>
                 <button onclick="iloveyou()">freg i love you</button>
+                <button onclick="frogtank()">you're a frog, and for this reason i'm out. <br> - barbara, 20xx</button>
                 <p id="response"></p>
             </details>
         </div>
@@ -77,13 +86,9 @@
         </form>
         <button id="close-modal">close</button>
     </dialog>
-    <p class="made-with">
-        Made with <span id="changing-text">love</span><span id="cursor"> l</span>
-    </p>
     <script src="testfeed.js"></script>
     <script src="tour.js"></script>
     <script src="../prefrences.js"></script>
-    <script src="../textchange.js"></script>
     <script src="modal.js"></script>
 </body>
 </html>

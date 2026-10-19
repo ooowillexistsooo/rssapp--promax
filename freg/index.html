@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>who is freg?</title>
     <link rel="stylesheet" href="../cool.css">
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i></button>
     <a href="../index.html"><-- back home</a>
     <h1>who is freg?</h1>
     <details class="simple-dropdown">

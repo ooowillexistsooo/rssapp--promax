@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="../cool.css">
+    <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
+    <script>
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+        }
+    </script>
 </head>
 <body>
+    <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i></button>
     <p class="feed">this is a test rss thing! if i were to change this, it would update automatically</p>
+    <script src="../prefrences.js"></script>
 </body>
 </html>
