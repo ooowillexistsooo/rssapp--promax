@@ -233,3 +233,25 @@ nav.cloud {
         color: light-dark(#4a3c31, #f5f1df);
     }
 }
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px dotted #727272;
+}
+
+#deployment-info {
+    margin-top: 8px;
+    font-size: 12px;
+    font-family: monospace;
+}
+
+#deployment-info a {
+    color: #0066cc;
+    text-decoration: wavy;
+}
+
+#deployment-info a:hover {
+    text-decoration: underline;
+}
