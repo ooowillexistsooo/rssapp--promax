@@ -22,6 +22,7 @@
 :root {
     --bg-color: #ffffff;
     --text-color: black;
+    color-scheme: light;
 }
 
 .dark-mode {
@@ -194,4 +195,41 @@ nav.cloud {
 
 .dark-mode #tour-text {
     color: #f5f1df;
+}
+
+@supports (color: light-dark(white, black)) {
+    :root {
+        --bg-color: light-dark(#ffffff, #121212);
+        --text-color: light-dark(#000000, #f5f5f5);
+    }
+
+    .made-with {
+        color: light-dark(#333333, #dddddd);
+    }
+
+    #changing-text {
+        color: light-dark(#0066cc, #80bdff);
+    }
+
+    .subtitle-text {
+        color: light-dark(#666666, #bbbbbb);
+    }
+
+    .gallery-item .caption {
+        background: light-dark(#ffffff, #242424);
+        color: light-dark(#333333, #eeeeee);
+    }
+
+    .dark-mode .container {
+        background-color: light-dark(rgb(195, 227, 255), #263543);
+    }
+
+    .dark-mode .textbox {
+        background-color: light-dark(#fbf7e3, #28261e);
+        border-color: light-dark(#e8dbb0, #5f5739);
+    }
+
+    .dark-mode #tour-text {
+        color: light-dark(#4a3c31, #f5f1df);
+    }
 }
