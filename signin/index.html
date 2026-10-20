@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width='device-width', initial-scale=1.0">
-    <title>sign in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iq test</title>
     <link rel="stylesheet" href="../cool.css">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="iq.css">
     <script>
         const currentTheme = localStorage.getItem('theme');
         if (currentTheme === 'dark') {
@@ -16,22 +15,40 @@
 </head>
 <body>
     <button id="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode" aria-pressed="false"><i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i></button>
-    <a href="../index.html">oops why am i here go back</a>
-    <div class="container">
-        <pre>sign in    </pre>
-        <form action="">
-            <label>username</label>
-            <input type="text">
-            <br>
-            <label>password</label>
-            <input type="password">
-        </form>
+    <h1>Sign Up!</h1>
+    <p>captcha's are boring, so instead, you are going to take an iq test!!!!!1!</p>
+    <div class="test-container">
+        <div id="welcome-screen" class="screen">
+            <h1>the great iq test much important</h1>
+            <p>5 questions to be able to sign up.</p>
+            <button id="start-btn">start test</button>
+        </div>
+        <div id="quiz-screen" class="screen hidden">
+            <div class="progress-bar-container">
+                <div id="progress" class="progress-bar"></div>
+            </div>
+            <h2 id="question-text">loading</h2>
+            <div id="options-container" class="options-grid">
+                <!--intergectef by js :DD-->
+            </div>
+        </div>
+        <div id="results-screen" class="screen hidden">
+            <h2>test complete..!</h2>
+            <div class="score-badge">
+                <span id="iq-score">-1</span>
+                <p>estimated iq</p>
+            </div>
+            <p id="iq-classification">of average intelligence</p>
+            <p>youre not ai i think</p>
+            <button id="restart-btn">retake test (why)</button>
+            <button id="redirect">continue to login/signup</button>
+        </div>
     </div>
     <footer>
         <div id="deployment-info">Loading version info...</div>
     </footer>
     <script src="../build-info.js"></script>
     <script src="../prefrences.js"></script>
-    
+    <script src="../backend/iq.js"></script>
 </body>
 </html>

@@ -1,0 +1,67 @@
+.test-container {
+    background-color: antiquewhite;
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    max-width: 550px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.progress-bar-container {
+    background: #e0e0e0;
+    border-radius: 6px;
+    height: 8px;
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.progress-bar {
+    background: #4a90e2;
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    background: #f9f9f9;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.score-badge {
+    background: #edf4fe;
+    color: #4a90e2;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#iq-score {
+    font-size: 38px;
+    font-weight: bold;
+}
+
+#iq-classification {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}

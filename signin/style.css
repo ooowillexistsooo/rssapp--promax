@@ -1,8 +1,9 @@
 body {
     padding: 10px;
+    margin: 0;
 }
 
-.container {
+.auth-container {
     background-color: rgb(195, 227, 255);
     padding: 10px;
     text-wrap: inherit;
@@ -12,8 +13,30 @@ body {
     align-items: center;
     height: 200px;
     border-radius: 7px;
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
 }
 
 pre {
     font-family: 'Pixel';
+}
+
+input, label {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.message {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #2e7d32;
 }
