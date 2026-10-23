@@ -42,8 +42,7 @@
         </div>
         <br>
         <div id="post" class="post love">
-            <h3>this could be your feed! this actually changes with <a href="https://testfeed.willexists.space">this site</a></h3>
-            <p id="test-feed">loading...</p>
+            <div id="feed-list"></div>
         </div>
         <br>
         <div class="what demo">
@@ -72,12 +71,12 @@
     <dialog id="new-rss-modal">
         <h2>add new rss feed</h2>
         <img src="../static/freg-notes.png">
-        <form action="">
+        <form id="new-rss-form">
             <label for="">title</label>
-            <input type="text" required>
+            <input id="feed-title" type="text" required>
             <br>
             <label for="">rss link</label>
-            <input type="text" placeholder="e.g. https://rss.app/feeds/Mvro7BfVoYRBffwo.xml" required>
+            <input id="feed-url" type="text" placeholder="e.g. https://rss.app/feeds/Mvro7BfVoYRBffwo.xml" required>
             <br>
             <button type="submit">add feed!</button>
             <br>
@@ -90,9 +89,8 @@
     </footer>
     <script src="../build-info.js"></script>
     <script src="../prefrences.js"></script>
-    <script src="testfeed.js"></script>
     <script src="tour.js"></script>
-
+    <script src="../backend/feeds.js"></script>
     <script src="modal.js"></script>
 </body>
 </html>
