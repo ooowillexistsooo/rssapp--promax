@@ -14,13 +14,13 @@ export default {
 
         if (request.method === "OPTIONS") {
             headers.set("Access-Control-Allow-Methods", "GET, OPTIONS");
-            headers.set("Access-Control-Allow-Methods", "Cntent-Type");
+            headers.set("Access-Control-Allow-Methods", "Content-Type");
             return new Response(null, {headers});
         }
 
         let feedUrl;
         try {
-            const rawUrl = new URL(request.url).searchParams.get("get");
+            const rawUrl = new URL(request.url).searchParams.get("url");
             if (!rawUrl) throw new Error("Missing URL");
             feedUrl = new URL(rawUrl);
         } catch {
@@ -35,8 +35,8 @@ export default {
         const isLocalhost = hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
         const isPrivateIp =
             hostname.startsWith("10.") ||
-            hostname.startsWith("198.168.") ||
-            /^172\.(1[629]|2[0-9]|3[0-1])\./.test(hostname);
+            hostname.startsWith("192.168.") ||
+            /^172\.(1[6-9]|2[0-9]|3[0-1])\./.test(hostname);
 
         if (isLocalhost || isPrivateIp) {
             return new Response("no i dont want you hacking into the irs dont use private networks.", {status: 403, headers});
@@ -45,8 +45,10 @@ export default {
         try {
             const upstream = await fetch(feedUrl.toString(), {
                 headers: {
-                    "User-Agent": "Freg/1.0"
-                }
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                    "Accept" : "application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8"
+                },
+                redirect: "follow"
             });
 
             headers.set(
