@@ -66,7 +66,6 @@
     <div class="danger-zone">
         <h3>DANGER ZONE!!!</h3>
         <img src="../static/freg-warning.png"><br>
-        <button id="pass-open">change password</button><br>
         <button id="del-open">delete account</button>
     </div>
     <dialog id="delete-account-modal">
@@ -77,20 +76,6 @@
         <button id="enableBtn4" disabled>fine</button>
         <button id="deleteAcctBtn confirm-delete-account" disabled>yes, delete account</button>
         <button id="del-close">close</button>
-    </dialog>
-    <dialog id="passcode-change-modal">
-        <h3 class="important">change password?</h3>
-        <form action="">
-            <label>are you like super duper sure</label>
-            <input type="text" placeholder="type 'ya im sure'" required pattern="^ya im sure$">
-            <label for="">please type your current password</label>
-            <input type="text" required><br>
-            <label for="">please type the new password</label>
-            <input type="text" required><br>
-            <button type="submit" >i am sure that i want to do this</button>
-            <button type="reset">reset form</button>
-        </form>
-        <button id="pass-close">close</button>
     </dialog>
     <footer>
         <div id="deployment-info">Loading version info...</div>
