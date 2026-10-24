@@ -3,6 +3,9 @@ const feedProxyUrl = "https://rssfetch.willafiala.workers.dev/";
 const form = document.getElementById("new-rss-form");
 const list = document.getElementById("feed-list");
 const modal = document.getElementById("new-rss-modal");
+const postModal = document.getElementById("post-modal");
+const postModalTitle = document.getElementById("post-modal-title");
+const postModalContent = document.getElementById("post-modal-content");
 
 function getFeeds() {
     try {
@@ -16,6 +19,28 @@ function getFeeds() {
 function saveFeeds(feeds) {
     localStorage.setItem(storageKey, JSON.stringify(feeds));
 }
+
+function getPostText(entry) {
+    const content = 
+        entry.getElementsByTagNameNS("*", "encoded")[0] ??
+        entry.querySelector("content, description, summary");
+
+    const rawText = content?.textContent?.trim() ?? "";
+    if (!rawText) return "This feed does not include post text."
+
+    const parsedHtml = new DOMParser().parseFromString(rawText, "text/html");
+    return parsedHtml.body.textContent?.trim() || rawText;
+}
+
+function showPost(title, text) {
+    postModalTitle.textContent = title;
+    postModalContent.textContent = text;
+    postModal.showModal();
+}
+
+document.getElementById("close-post-modal").addEventListener("click", () => {
+    postModal.close();
+})
 
 async function renderFeeds() {
     list.replaceChildren();
@@ -57,12 +82,27 @@ async function renderFeeds() {
             );
             if (xml.querySelector("parsererror")) throw new Error("Invalid feed XML");
 
-            const titles = [...xml.querySelectorAll("item, entry")]
-                .slice(0,5)
-                .map(item => item.querySelector("title")?.textContent?.trim())
-                .filter(Boolean);
+            const posts = [...xml.querySelectorAll("item, entry")].slice(0,5);
 
-            status.textContent = titles.length ? titles.join(" | ") : "No posts found.";
+            if (posts.length === 0) {
+                status.textContent = "no posts found.";
+            } else {
+                status.textContent = "latest posts:";
+
+                for (const post of posts) {
+                    const title = post.querySelector("title")?.textContent?.trim() || "Untitled post";
+                    const button = document.createElement("button");
+
+                    button.type = "button"
+                    button.textContent = title;
+                    button.classList.add("post-button")
+                    button.addEventListener("click", () => {
+                        showPost(title, getPostText(post));
+                    });
+
+                    section.append(button);
+                }
+            }
         } catch {
             status.textContent = "Could not load this feed. It may block browser requests"
         }

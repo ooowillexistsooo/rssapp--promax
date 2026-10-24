@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main feed</title>
     <link rel="stylesheet" href="../cool.css">
-    <link rel="stylesheet" href="welcome.css">
+    <link rel="stylesheet" href="welcome.css?v=poobert-sprite-2">
     <link rel="stylesheet" href="modal.css">
     <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
     <script>
@@ -45,16 +45,11 @@
             <div id="feed-list"></div>
         </div>
         <br>
-        <div class="what demo">
-            <h3>have we convinced you to sign up yet?</h3>
-            <a href="../signin/index.html">sign up</a>
-        </div>
-        <br>
         <div id="tour-box" class="tour-hidden">
             <div class="textbox">
                 <div class="avatar-container">
-                    <img src="../static/tour-freg.png" alt="freg" id="avatar">
-                    <div class="name-tag">tour guide freg</div>
+                    <img src="../static/freg-1.png" alt="freg" id="avatar">
+                    <div class="name-tag" id="name-tag">tour guide freg</div>
                 </div>
                 <div class="dialog-body">
                     <p id="tour-text"></p>
@@ -84,12 +79,17 @@
         </form>
         <button id="close-modal">close</button>
     </dialog>
+    <dialog id="post-modal">
+        <h2 id="post-modal-title"></h2>
+        <p id="post-modal-content"></p>
+        <button id="close-post-modal">close</button>
+    </dialog>
     <footer>
         <div id="deployment-info">Loading version info...</div>
     </footer>
     <script src="../build-info.js"></script>
     <script src="../prefrences.js"></script>
-    <script src="tour.js"></script>
+    <script src="tour.js?v=poobert-sprite-2"></script>
     <script src="../backend/feeds.js"></script>
     <script src="modal.js"></script>
 </body>

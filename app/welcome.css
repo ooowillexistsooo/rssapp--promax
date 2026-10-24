@@ -29,6 +29,10 @@
     align-items: center;
 }
 
+.poobert-tour .avatar-container {
+    top: -125px;
+}
+
 #avatar {
     width: 85px;
     height: 85px;
@@ -37,6 +41,16 @@
     border: 5px solid #e8dbb0;
     object-fit: cover;
     box-shadow: 0px 4px 0px rgba(0,0,0,0.1);
+}
+
+#avatar.poobert-sprite {
+    width: 140px;
+    height: 140px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    object-fit: contain;
+    box-shadow: none;
 }
 
 .name-tag {
@@ -99,4 +113,20 @@
 
 .tour-hidden {
     display: none !important;
+}
+
+#post-modal {
+    max-width: min(700px, 90vw);
+    max-height: 80vh;
+    overflow: auto;
+}
+
+#post-modal-content {
+    white-space: pre-wrap;
+}
+
+.post-button {
+    background-color: #ffffff;
+    border: #5ea358 dotted 3px;
+    margin: 4px
 }

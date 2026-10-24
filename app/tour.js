@@ -56,7 +56,9 @@ const nextBtn = document.getElementById("tour-next-button");
 const skipBtn = document.getElementById("tour-skip-button");
 const tourSeenKey = "rssAppTourSeen";
 const completedToursKey = "rssAppCompletedTours";
+const poobertTourSeenKey = "rssAppPoobertTourSeen";
 const avatar = document.getElementById("avatar");
+const nameTag = document.getElementById("name-tag");
 
 function startTour(force = false) {
     if (!force && localStorage.getItem(tourSeenKey)) {
@@ -67,10 +69,16 @@ function startTour(force = false) {
     clearInterval(textTimer);
     currentStep = 0;
     isTourActive = true;
-    isEasterEggTour = Number(localStorage.getItem(completedToursKey) || "0") >= 7;
-    avatar.src = isEasterEggTour
-        ? "../static/tour-freg.png"
-        : "../static/freg-1.png";
+    isEasterEggTour = Number(localStorage.getItem(completedToursKey) || "0") >= 7
+        && !localStorage.getItem(poobertTourSeenKey);
+    if (isEasterEggTour) {
+        localStorage.setItem(poobertTourSeenKey, "true");
+    }
+    avatar.src = isEasterEggTour ? "../static/poobert.png" : "../static/freg-1.png";
+    avatar.alt = isEasterEggTour ? "poobert" : "freg";
+    avatar.classList.toggle("poobert-sprite", isEasterEggTour);
+    nameTag.textContent = isEasterEggTour ? "poobert" : "tour guide freg";
+    tourBox.classList.toggle("poobert-tour", isEasterEggTour);
     tourBox.classList.remove("tour-hidden");
     showStep();
 }
@@ -80,9 +88,13 @@ function showStep() {
 
     if (currentStep < tourSteps.length) {
         const step = tourSteps[currentStep];
-        completeText = currentStep === 0 && isEasterEggTour
-                ? "hi im poobert and i'll be the one giving you this tour"
-                : step.text;
+        if (isEasterEggTour && currentStep === 0) {
+            completeText = "hi im poobert and i'll be the one giving you this tour, freg nees a break";
+        } else if (isEasterEggTour && currentStep === 1) {
+            completeText = "In this tour, I, Poobert, will show you around!";
+        } else {
+            completeText = step.text;
+        }
 
         const targetElement = document.getElementById(step.elementId);
         if (targetElement) {
