@@ -3,10 +3,7 @@ const themeToggleBtn = document.getElementById('theme-toggle');
 const savedTheme = localStorage.getItem('theme');
 
 document.documentElement.classList.toggle('dark-mode', savedTheme === 'dark');
-
-if (savedFont && document.body) {
-    document.body.style.fontFamily = savedFont;
-}
+document.documentElement.style.setProperty('--site-font', savedFont || "'Pixel'");
 
 document.addEventListener('DOMContentLoaded', () => {
     const fontDropdown = document.getElementById('fontDropdown');
@@ -18,8 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         fontDropdown.addEventListener('change', function() {
             const selectedFont = this.value;
 
-            document.body.style.fontFamily = selectedFont;
             localStorage.setItem('globalSiteFont', selectedFont);
+            document.documentElement.style.setProperty('--site-font', selectedFont);
         });
     }
 });

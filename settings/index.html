@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>settings</title>
-    <link rel="stylesheet" href="../cool.css">
+    <link rel="stylesheet" href="../cool.css?v=global-font-2">
     <link rel="stylesheet" href="../app/modal.css">
     <link rel="stylesheet" href="settings.css">
     <script src="https://kit.fontawesome.com/290c5a7a5b.js" crossorigin="anonymous"></script>
@@ -56,11 +56,11 @@
         <form action="">
             <label>opt in to holiday things?</label>
             <input type="checkbox"><br>
-            <label>username</label>
-            <input type="text">
         </form>
-        <button>export feed info</button>
-        <button>import feed info</button>
+        <button id="export-feeds">export feeds</button>
+        <button id="import-feeds">import feeds</button>
+        <input type="file" id="import-feeds-file" accept=".json,application/json" hidden>
+        <p id="feed-transfer-status" role="status" aria-live="polite"></p>
     </div>
     <div class="danger-zone">
         <h3>DANGER ZONE!!!</h3>
@@ -92,7 +92,7 @@
         <div id="deployment-info">Loading version info...</div>
     </footer>
     <script src="../build-info.js"></script>
-    <script src="../prefrences.js"></script>
+    <script src="../prefrences.js?v=global-font-2"></script>
     <script type="module" src="../backend/fetch-email.js"></script>
     <script>
         const delmodal = document.getElementById('delete-account-modal');
@@ -118,5 +118,6 @@
             passmodal.close();
         });
     </script>
+    <script src="../backend/exportimport.js"></script>
 </body>
 </html>

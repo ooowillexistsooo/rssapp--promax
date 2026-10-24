@@ -22,6 +22,7 @@
 :root {
     --bg-color: #ffffff;
     --text-color: black;
+    --site-font: 'Pixel';
     color-scheme: light;
 }
 
@@ -32,7 +33,7 @@
 }
 
 body {
-    font-family: 'Pixel';
+    font-family: var(--site-font);
     font-size: medium;
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -145,7 +146,14 @@ summary {
 }
 
 button {
-    font-family: "Pixel";
+    font-family: var(--site-font);
+}
+
+input,
+select,
+textarea,
+pre {
+    font-family: var(--site-font);
 }
 
 #theme-toggle {
