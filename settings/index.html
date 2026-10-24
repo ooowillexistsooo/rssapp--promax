@@ -56,6 +56,7 @@
         <form action="">
             <label>opt in to holiday things?</label>
             <input type="checkbox"><br>
+            <button type="submit">submit</button>
         </form>
         <button id="export-feeds">export feeds</button>
         <button id="import-feeds">import feeds</button>
@@ -64,14 +65,17 @@
     </div>
     <div class="danger-zone">
         <h3>DANGER ZONE!!!</h3>
-        <img src="../static/freg-warning.png">
+        <img src="../static/freg-warning.png"><br>
         <button id="pass-open">change password</button><br>
         <button id="del-open">delete account</button>
     </div>
     <dialog id="delete-account-modal">
         <h1>delete account?</h1>
-        <button>you're sure???</button>
-        
+        <button id="enableBtn1">you're sure???</button>
+        <button id="enableBtn2" disabled>like really sure</button>
+        <button id="enableBtn3" disabled>you really wanna do this?</button>
+        <button id="enableBtn4" disabled>fine</button>
+        <button id="deleteAcctBtn confirm-delete-account" disabled>yes, delete account</button>
         <button id="del-close">close</button>
     </dialog>
     <dialog id="passcode-change-modal">
@@ -119,5 +123,7 @@
         });
     </script>
     <script src="../backend/exportimport.js"></script>
+    <script src="../backend/areyousure.js"></script>
+    <script src="../backend/deleteacct.js"></script>
 </body>
 </html>
