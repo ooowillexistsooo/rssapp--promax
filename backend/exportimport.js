@@ -64,11 +64,11 @@ fileUpload.addEventListener("change", async () => {
             ...newFeeds.filter((feed) => !existingUrls.has(feed.url))
         ];
 
-        localStorage.getItem(storageKey, JSON.stringify(mergedFeeds));
+        localStorage.setItem(storageKey, JSON.stringify(mergedFeeds));
         statusText.textContent = `Imported ${mergedFeeds.length - savedFeeds.length} new feed(s)`;
     } catch (error) {
         statusText.textContent = `Could not import feeds: ${error.message}`;
     } finally {
-        fileInput.value = "";
+        fileUpload.value = "";
     }
 });
