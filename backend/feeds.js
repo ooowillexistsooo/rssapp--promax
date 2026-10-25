@@ -1,4 +1,12 @@
-const storageKey = "rssFeeds";
+import {auth} from "./firebase-config.js";
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { loadFeeds, saveFeeds } from "./feed-storage.js";
+
+let currentUser = null;
+let feeds = [];
+let feedsLoaded = false;
 const feedProxyUrl = "https://rssfetch.willafiala.workers.dev/";
 const form = document.getElementById("new-rss-form");
 const list = document.getElementById("feed-list");
@@ -6,19 +14,6 @@ const modal = document.getElementById("new-rss-modal");
 const postModal = document.getElementById("post-modal");
 const postModalTitle = document.getElementById("post-modal-title");
 const postModalContent = document.getElementById("post-modal-content");
-
-function getFeeds() {
-    try {
-        const feeds = JSON.parse(localStorage.getItem(storageKey) || "[]");
-        return Array.isArray(feeds) ? feeds : [];
-    } catch {
-        return [];
-    }
-}
-
-function saveFeeds(feeds) {
-    localStorage.setItem(storageKey, JSON.stringify(feeds));
-}
 
 function getPostText(entry) {
     const content = 
@@ -45,7 +40,6 @@ document.getElementById("close-post-modal").addEventListener("click", () => {
 async function renderFeeds() {
     list.replaceChildren();
 
-    const feeds = getFeeds();
     if (feeds.length === 0) {
         const emptyState = document.createElement("p");
         emptyState.textContent = "No feeds yet. Add an RSS feed to get started.";
@@ -62,9 +56,16 @@ async function renderFeeds() {
         heading.textContent = feed.title;
         status.textContent = "Loading...";
         remove.textContent = "Remove feed";
-        remove.addEventListener("click", () => {
-            saveFeeds(getFeeds().filter(item => item.url !== feed.url));
-            renderFeeds();
+        remove.addEventListener("click", async () => {
+            const updatedFeeds = feeds.filter(item => item.url !== feed.url);
+            try {
+                await saveFeeds(currentUser, updatedFeeds);
+                feeds = updatedFeeds;
+                await renderFeeds();
+            } catch (error) {
+                console.error("Could not remove feed:", error);
+                status.textContent = "Could not remove this feed. Please try again.";
+            }
         });
 
         section.append(heading, status, remove);
@@ -109,21 +110,42 @@ async function renderFeeds() {
     }
 }
 
-form.addEventListener("submit", event => {
+form.addEventListener("submit", async event => {
     event.preventDefault();
+
+    if (!feedsLoaded) {
+        list.textContent = "Feeds are still loading. Please try again in a moment.";
+        return;
+    }
 
     const title = document.getElementById("feed-title").value.trim();
     const url = new URL(document.getElementById("feed-url").value.trim());
     if (url.protocol !== "https:") return;
 
-    const feeds = getFeeds();
     if (feeds.some(feed => feed.url === url.href)) return;
 
-    feeds.push({title, url: url.href});
-    saveFeeds(feeds);
-    form.reset();
-    modal.close();
-    renderFeeds();
+    const updatedFeeds = [...feeds, {title, url: url.href}];
+    try {
+        await saveFeeds(currentUser, updatedFeeds);
+        feeds = updatedFeeds;
+        form.reset();
+        modal.close();
+        await renderFeeds();
+    } catch (error) {
+        console.error("Could not save feed:", error);
+        list.textContent = "Could not save this feed. Please try again.";
+    }
 });
 
-renderFeeds();
+onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+
+    try {
+        feeds = await loadFeeds(user);
+        feedsLoaded = true;
+        await renderFeeds();
+    } catch (error) {
+        console.error("Could not load account feeds:", error);
+        list.textContent = "Could not load your feeds. Please wait a minute and refresh the page."
+    }
+});

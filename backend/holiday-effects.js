@@ -30,18 +30,6 @@
             "holiday-halloween",
             isHalloween
         );
-
-        let decoration = document.getElementById("holiday-decoration");
-
-        if (isHalloween && !decoration) {
-            decoration = document.createElement("span");
-            decoration.id = "holiday-decoration";
-            decoration.setAttribute("aria-hidden", "true");
-            decoration.textContent = "🎃";
-            document.body.append(decoration);
-        } else if (!isHalloween) {
-            decoration?.remove();
-        }
     }
 
     applyHolidayEffects();

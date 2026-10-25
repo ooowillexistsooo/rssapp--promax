@@ -10,7 +10,7 @@ const emailInput = document.getElementById("email");
 const messageEl = document.getElementById("message");
 
 const actionCodeSettings = {
-    url: window.location.href,
+    url: new URL(window.location.pathname, window.location.origin).href,
     handleCodeInApp: true
 };
 
@@ -32,7 +32,7 @@ authForm.addEventListener("submit", async (event) => {
 if (isSignInWithEmailLink(auth, window.location.href)) {
     let email = window.localStorage.getItem("emailForSignIn");
     if (!email) {
-        email = window.prompt("please actually type your email");
+        email = window.prompt("please retype your email for security!");
     }
 
     if (!email) {

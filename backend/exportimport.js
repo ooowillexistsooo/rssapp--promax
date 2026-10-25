@@ -1,27 +1,51 @@
-const storageKey = "rssFeeds";
+import { auth } from "./firebase-config.js";
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import { loadFeeds, saveFeeds } from "./feed-storage.js";
+
 const exportButton = document.getElementById("export-feeds");
 const importButton = document.getElementById("import-feeds");
 const fileUpload = document.getElementById("import-feeds-file");
 const statusText = document.getElementById("feed-transfer-status");
 
-exportButton.addEventListener("click", () => {
-    const feeds = JSON.parse(localStorage.getItem(storageKey) || "[]");
-    if (!Array.isArray(feeds)) {
-        statusText.textContent = "Saved feed data is not in the expected format.";
-        return;
-    }
-
-    const file = new Blob(
-        [JSON.stringify({version: 1, feeds}, null, 2)],
-        {type: "application/json"}
+let unsubscribeAuth;
+const userReady = new Promise((resolve, reject) => {
+    unsubscribeAuth = onAuthStateChanged(
+        auth,
+        user => {
+            unsubscribeAuth();
+            resolve(user);
+        },
+        reject
     );
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(file);
-    link.download = "rss-feeds.json";
-    link.click();
-    URL.revokeObjectURL(link.href);
+});
 
-    statusText.textContent = "feeds exported";
+async function getCurrentUser() {
+    await userReady;
+    return auth.currentUser;
+}
+
+exportButton.addEventListener("click", async () => {
+    try {
+        const user = await getCurrentUser();
+        const feeds = await loadFeeds(user);
+
+        const file = new Blob(
+            [JSON.stringify({version: 1, feeds}, null, 2)],
+            {type: "application/json"}
+        );
+        const link = document.createElement("a");
+        const fileUrl = URL.createObjectURL(file);
+        link.href = fileUrl;
+        link.download = "rss-feeds.json";
+        link.click();
+        URL.revokeObjectURL(fileUrl);
+
+        statusText.textContent = "feeds exported";
+    } catch (error) {
+        statusText.textContent = `Could not export feeds: ${error.message}`;
+    }
 });
 
 importButton.addEventListener("click", () => fileUpload.click());
@@ -53,18 +77,19 @@ fileUpload.addEventListener("change", async () => {
             return {title: feed.title.trim(), url: url.href};
         });
 
-        const savedFeeds = JSON.parse(localStorage.getItem(storageKey) || "[]");
-        if (!Array.isArray(savedFeeds)) {
-            throw new Error("existing saved feed data not in expected format");
-        }
+        const user = await getCurrentUser();
+        const savedFeeds = await loadFeeds(user);
 
         const existingUrls = new Set(savedFeeds.map((feed) => feed.url));
-        const mergedFeeds = [
-            ...savedFeeds,
-            ...newFeeds.filter((feed) => !existingUrls.has(feed.url))
-        ];
+        const mergedFeeds = [...savedFeeds];
+        for (const feed of newFeeds) {
+            if (!existingUrls.has(feed.url)) {
+                mergedFeeds.push(feed);
+                existingUrls.add(feed.url);
+            }
+        }
 
-        localStorage.setItem(storageKey, JSON.stringify(mergedFeeds));
+        await saveFeeds(user, mergedFeeds);
         statusText.textContent = `Imported ${mergedFeeds.length - savedFeeds.length} new feed(s)`;
     } catch (error) {
         statusText.textContent = `Could not import feeds: ${error.message}`;
