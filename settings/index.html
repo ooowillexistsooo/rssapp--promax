@@ -53,11 +53,10 @@
     <button id="logout-btn" hidden>Log out</button>
     <p id="account-message" role="status"></p>
     <div>
-        <form action="">
-            <label>opt in to holiday things?</label>
-            <input type="checkbox"><br>
-            <button type="submit">submit</button>
-        </form>
+        <label for="">
+            <input type="checkbox" id="holiday-effects-toggle">
+            opt in to holiday mode?
+        </label><br>
         <button id="export-feeds">export feeds</button>
         <button id="import-feeds">import feeds</button>
         <input type="file" id="import-feeds-file" accept=".json,application/json" hidden>
@@ -110,5 +109,6 @@
     <script src="../backend/exportimport.js"></script>
     <script src="../backend/areyousure.js"></script>
     <script src="../backend/deleteacct.js"></script>
+    <script src="../backend/holiday-effects.js"></script>
 </body>
 </html>
