@@ -38,7 +38,9 @@
                 <button onclick="startTour(true)">hello freg please show me the tour again</button>
                 <button onclick="iloveyou()">freg i love you</button>
                 <button onclick="frogtank()">you're a frog, and for this reason i'm out. <br> - barbara, 20xx</button>
+                <button onclick="reccomend()">ask for a reccomendation</button>
                 <p id="response"></p>
+                <p id="reccomendation"></p>
             </details>
         </div>
         <br>
@@ -96,5 +98,22 @@
     <script type="module" src="../backend/streak.js"></script>
     <script src="../backend/holiday-effects.js"></script>
     <script type="module" src="../backend/custom-feed-css.js"></script>
+    <script>
+        const reccomendation = document.getElementById("reccomendation")
+        const messages = [
+            "the verge",
+            "slacker news",
+            "the onion",
+            "the new york times",
+            "la times",
+            "ign"
+        ];
+        let clickCount = 0;
+        function reccomend() {
+            const messageIndex = clickCount % messages.length;
+            reccomendation.textContent = messages[messageIndex];
+            clickCount++;
+        }
+    </script>
 </body>
 </html>
