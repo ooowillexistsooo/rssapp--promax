@@ -1,7 +1,11 @@
-import {auth} from "../backend/firebase-config.js";
+import {auth, db} from "../backend/firebase-config.js";
 import {
     deleteUser
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
+import {
+    deleteDoc,
+    doc
+} from "https://www.gstatic.com/firebasejs/13.0.0/firebase-firestore.js";
 
 const deleteButton = document.getElementById("deleteAcctBtn");
 const deleteModal = document.getElementById("delete-account-modal");
@@ -15,14 +19,23 @@ deleteButton.addEventListener("click", async () =>{
         return;
     }
 
+    let feedDataDeleted = false;
+
     try {
-        deleteUser(user);
+        await deleteDoc(doc(db, "users", user.uid));
+        feedDataDeleted = true;
+        await deleteUser(user);
         deleteModal.close();
         window.location.href = "../signin/signin.html";
     } catch (error) {
-        message.textContent =
-            error.code === "auth/requires-recent-login"
-                ? "for security reasons, please sign out and sign in again."
-                : `Could not delete your account. ${error.message}`
+        if (feedDataDeleted && error.code === "auth/requires-recent-login") {
+            message.textContent = "Your feed data was deleted. For security, sign out and sign back in, then retry account deletion.";
+        } else if (error.code === "auth/requires-recent-login") {
+            message.textContent = "For security, sign out and sign back in, then retry account deletion.";
+        } else if (feedDataDeleted) {
+            message.textContent = `Your feed data was deleted, but the account could not be deleted: ${error.message}`;
+        } else {
+            message.textContent = `Could not delete account data. Your account is still active. ${error.message}`;
+        }
     }
 });
