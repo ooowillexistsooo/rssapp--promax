@@ -6,11 +6,11 @@ wow
 try it at
 https://rss.willexists.space
 ## freg
-![fun](static/freg-1.png)
+![fun](static/freg-1.png) <br>
 freg is the mascot/streak enjoyer/enthusiast of rss app ++ pro max. we love freg he is the peak of froguliniscy.
 
-## disclaimer
-this is currently only front end. the backend will be completed ~~next week~~ now!
+## backend
+the backend runs in firebase
 
 ## things used
 - html
