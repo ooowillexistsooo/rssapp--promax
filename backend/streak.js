@@ -2,6 +2,7 @@
 const storageKey = "fregStreak";
 const button = document.getElementById("freg-streak-toggle");
 const statusText = document.getElementById("freg-streak-status");
+const goalSeconds = 120;
 
 function localDateKey(date = new Date()) {
     const year = date.getFullYear();
@@ -10,41 +11,53 @@ function localDateKey(date = new Date()) {
     return `${year}-${month}-${day}`;
 }
 
-function getYesterdayKey() {
-    const yesterday = new Date();
+function getYesterdayKey(date = new Date()) {
+    const yesterday = new Date(date);
     yesterday.setDate(yesterday.getDate() - 1);
     return localDateKey(yesterday);
 }
 
-const today = localDateKey();
 const state = JSON.parse(localStorage.getItem(storageKey) || "null") || {
     count: 0,
     lastCompletedDate: null,
-    trackedDate: today,
+    trackedDate: localDateKey(),
     secondsToday: 0
 };
-
-if (state.trackedDate !== today) {
-    state.trackedDate = today;
-    state.secondsToday = 0;
-}
-
-let isTracking = false;
 
 function saveState() {
     localStorage.setItem(storageKey, JSON.stringify(state));
 }
 
+function updateTrackedDay() {
+    const today = localDateKey();
+
+    if (state.trackedDate !== today) {
+        state.trackedDate = today;
+        state.secondsToday = 0;
+        saveState();
+    }
+
+    return today;
+}
+
+let isTracking = false;
+
 function render() {
+    const today = updateTrackedDay();
     const streakIsActive =
         state.lastCompletedDate === today ||
-        state.lastCompletedDate === getYesterdayKey();
+        state.lastCompletedDate === getYesterdayKey(new Date());
     const displayedCount = streakIsActive ? state.count : 0;
-    const minutes = Math.floor(state.secondsToday / 60);
-    const seconds = state.secondsToday % 60;
+    const displayedSeconds = Math.min(state.secondsToday, goalSeconds);
+    const minutes = Math.floor(displayedSeconds / 60);
+    const seconds = displayedSeconds % 60;
+    const goalMinutes = Math.floor(goalSeconds / 60);
+    const goalRemainder = goalSeconds % 60;
+    const goalText =
+        `${goalMinutes}:${String(goalRemainder).padStart(2, "0")}`;
 
     statusText.textContent =
-        `Streak: ${displayedCount} day(s)! Today: ${minutes}:${String(seconds).padStart(2, "0")} / 2:00`;
+        `Streak: ${displayedCount} day(s)! Today: ${minutes}:${String(seconds).padStart(2, "0")} / ${goalText}`;
     button.textContent = isTracking ? "pause reading" : "start reading";
 }
 
@@ -54,19 +67,27 @@ button.addEventListener("click", () => {
 });
 
 setInterval(() => {
+    const previousTrackedDate = state.trackedDate;
+    const today = updateTrackedDay();
+
+    if (state.trackedDate !== previousTrackedDate) {
+        render();
+    }
+
     if (
         !isTracking ||
         document.visibilityState !== "visible" ||
-        !document.hasFocus()
+        !document.hasFocus() ||
+        state.lastCompletedDate === today
     ) {
         return;
     }
 
-    state.secondsToday += 1;
+    state.secondsToday = Math.min(state.secondsToday + 1, goalSeconds);
 
-    if (state.secondsToday >= 120 && state.lastCompletedDate !== today) {
+    if (state.secondsToday >= goalSeconds) {
         state.count =
-            state.lastCompletedDate === getYesterdayKey()
+            state.lastCompletedDate === getYesterdayKey(new Date())
                 ? state.count + 1
                 : 1;
         state.lastCompletedDate = today;

@@ -24,10 +24,12 @@
     <p id="feed-editor-status" aria-live="polite" role="status"></p>
     <div id="feed-editor-list"></div>
     <h3>customising</h3>
-    <div>
-        <label>custom feed css</label>
-        <textarea placeholder="blah blah..."></textarea>
-    </div>
+    <form id="custom-feed-css-form">
+        <label for="custom-feed-css">custom feed css</label>
+        <textarea id="custom-feed-css" rows="8" spellcheck="false" placeholder="#feed-list .post-button {background: lavendar;}"></textarea>
+        <button type="submit">save custom css</button>
+    </form>
+    <p id="custom-feed-css-status" role="status" aria-live="polite"></p>
     <div>
         <label for="">choose your font..!</label>
         <select id="fontDropdown">
@@ -97,5 +99,6 @@
     <script src="../backend/holiday-effects.js"></script>
     <script type="module" src="../backend/change-email.js">// changing emails i see</script>
     <script type="module" src="../backend/feed-editor.js"></script>
+    <script type="module" src="../backend/custom-feed-css.js"></script>
 </body>
 </html>
