@@ -70,7 +70,7 @@ onAuthStateChanged(
     }
 );
 
-form?.addEventListener("click", async event => {
+form?.addEventListener("submit", async event => {
     event.preventDefault();
     if (!cssReady) {
         status.textContent = "Custom css is still loading...";
