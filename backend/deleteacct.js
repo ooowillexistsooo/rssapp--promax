@@ -3,7 +3,7 @@ import {
     deleteUser
 } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-auth.js";
 
-const deleteButton = document.getElementById("confirm-delete-account");
+const deleteButton = document.getElementById("deleteAcctBtn");
 const deleteModal = document.getElementById("delete-account-modal");
 const message = document.getElementById("account-message");
 

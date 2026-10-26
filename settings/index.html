@@ -26,13 +26,8 @@
         <input type="checkbox">
     </div>
     <h3>my feeds</h3>
-    <div>
-        <div>
-            <h3>demo feed</h3>
-            <button>edit title</button><br>
-            <button>delete feed</button>
-        </div>
-    </div>
+    <p id="feed-editor-status" aria-live="polite" role="status"></p>
+    <div id="feed-editor-list"></div>
     <h3>customising</h3>
     <div>
         <label>custom feed css</label>
@@ -62,6 +57,12 @@
         <input type="file" id="import-feeds-file" accept=".json,application/json" hidden>
         <p id="feed-transfer-status" role="status" aria-live="polite"></p>
     </div>
+    <form id="change-email-form">
+        <label for="new-email">new email address</label>
+        <input type="email" id="new-email" autocomplete="email" required>
+        <button type="submit">send verification link</button>
+    </form>
+    <p id="email-change-message" role="status" aria-live="polite"></p>
     <div class="danger-zone">
         <h3>DANGER ZONE!!!</h3>
         <img src="../static/freg-warning.png"><br>
@@ -73,7 +74,7 @@
         <button id="enableBtn2" disabled>like really sure</button>
         <button id="enableBtn3" disabled>you really wanna do this?</button>
         <button id="enableBtn4" disabled>fine</button>
-        <button id="deleteAcctBtn" id="confirm-delete-account" disabled>yes, delete account</button>
+        <button id="deleteAcctBtn" disabled>yes, delete account</button>
         <button id="del-close">close</button>
     </dialog>
     <footer>
@@ -86,9 +87,6 @@
         const delmodal = document.getElementById('delete-account-modal');
         const openBtnDel = document.getElementById('del-open');
         const closeBtnDel = document.getElementById('del-close');
-        const passmodal = document.getElementById('passcode-change-modal');
-        const openBtnPass = document.getElementById('pass-open');
-        const closeBtnPass = document.getElementById('pass-close');
 
         openBtnDel.addEventListener('click', () => {
             delmodal.showModal();
@@ -97,18 +95,11 @@
         closeBtnDel.addEventListener('click', () => {
             delmodal.close();
         });
-
-        openBtnPass.addEventListener('click', () => {
-            passmodal.showModal();
-        });
-
-        closeBtnPass.addEventListener('click', () => {
-            passmodal.close();
-        });
     </script>
     <script type="module" src="../backend/exportimport.js"></script>
     <script src="../backend/areyousure.js"></script>
     <script src="../backend/deleteacct.js"></script>
     <script src="../backend/holiday-effects.js"></script>
+    <script type="module" src="../backend/change-email.js">// changing emails i see</script>
 </body>
 </html>
